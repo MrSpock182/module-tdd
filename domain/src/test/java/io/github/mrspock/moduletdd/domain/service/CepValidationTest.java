@@ -13,7 +13,7 @@ class CepValidationTest {
 
     @Test
     void validation_cep_correct_test() {
-        service.validate("064493800");
+        service.validate("06449380");
         assertTrue(true);
     }
 
@@ -32,13 +32,13 @@ class CepValidationTest {
     @Test
     void validation_cep_same_characters_test() {
         assertThrows(BadRequestException.class, () ->
-                service.validate("000000000"));
+                service.validate("00000000"));
     }
 
     @Test
     void validation_cep_if_characters_is_not_number() {
         assertThrows(BadRequestException.class, () ->
-                service.validate("064493-80"));
+                service.validate("06449-38"));
     }
 
 }
