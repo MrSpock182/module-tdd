@@ -1,0 +1,33 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: module-tdd
+
+resilience4j:
+  retry:
+    backends:
+      find-cep-retry:
+        maxRetryAttempts: 10
+        waitDuration: 1000
+  #        retryExceptions:
+  #          - br.com.studiotrek.resilience.exception.RequestTimeout
+  circuit-breaker:
+    backends:
+      find-cep-circuit-breaker:
+        failureRateThreshold: 5
+        waitDurationInOpenState: 30s
+        minimumNumberOfCalls: 5
+        permittedNumberOfCallsInHalfOpenState: 5
+        slidingWindowSize: 5
+#        ignoreExceptions:
+#          - br.com.studiotrek.resilience.exception.InternalServerError
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 10000
+        readTimeout: 5000
+      via-cep:
+        url: https://viacep.com.br
